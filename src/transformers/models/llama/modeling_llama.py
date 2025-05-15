@@ -44,11 +44,6 @@ from ...utils import LossKwargs, auto_docstring, can_return_tuple, is_torch_flex
 from .configuration_llama import LlamaConfig
 
 
-
-
-
-
-
 if is_torch_flex_attn_available():
     from torch.nn.attention.flex_attention import BlockMask
 
@@ -101,11 +96,6 @@ class LlamaRotaryEmbedding(nn.Module):
         inv_freq, self.attention_scaling = self.rope_init_fn(self.config, device)
         self.register_buffer("inv_freq", inv_freq, persistent=False)
         self.original_inv_freq = self.inv_freq
-
-
-
-
-
 
     @torch.no_grad()
     @dynamic_rope_update  # power user: used with advanced RoPE types (e.g. dynamic rope)
