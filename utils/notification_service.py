@@ -665,11 +665,11 @@ class Message:
 
         text = f"{self.n_failures} failures out of {self.n_tests} tests," if self.n_failures else "All tests passed."
 
-        self.thread_ts = client.chat_postMessage(
-            channel=SLACK_REPORT_CHANNEL_ID,
-            blocks=payload,
-            text=text,
-        )
+        # self.thread_ts = client.chat_postMessage(
+        #     channel=SLACK_REPORT_CHANNEL_ID,
+        #     blocks=payload,
+        #     text=text,
+        # )
 
     def get_reply_blocks(self, job_name, job_result, failures, device, text):
         """
@@ -1394,4 +1394,4 @@ if __name__ == "__main__":
     # send report only if there is any failure (for push CI)
     if message.n_failures or (ci_event != "push" and not ci_event.startswith("Push CI (AMD)")):
         message.post()
-        message.post_reply()
+        # message.post_reply()
