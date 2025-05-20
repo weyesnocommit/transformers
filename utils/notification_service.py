@@ -1273,7 +1273,7 @@ if __name__ == "__main__":
 
     # Only the model testing job is concerned: this condition is to avoid other jobs to upload the empty list as
     # results.
-    if job_name == ["run_models_gpu", "run_trainer_and_fsdp_gpu"]:
+    if job_name in ["run_models_gpu", "run_trainer_and_fsdp_gpu"]:
         job = job_to_test_map[job_name]
         with open(f"ci_results_{job_name}/{test_to_result_name[job]}_results.json", "w", encoding="UTF-8") as fp:
             json.dump(model_results, fp, indent=4, ensure_ascii=False)
