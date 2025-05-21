@@ -724,11 +724,19 @@ class Message:
         if prev_ci_artifacts is None:
             return []
 
-        model_results = self.model_results
+        # TODO: better way
+        if job_name == "run_models_gpu":
+            model_results = self.model_results
+        else:
+            model_results = self.additional_failures[job_to_test_map[job_name]]
+
+        print(model_results)
 
         # TODO: make this more clear/explicit
         if "failures" in model_results:
             model_results = {"dummy": model_results}
+
+        print(model_results)
 
         sorted_dict = sorted(model_results.items(), key=lambda t: t[0])
 
