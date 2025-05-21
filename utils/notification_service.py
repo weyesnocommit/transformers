@@ -519,6 +519,8 @@ class Message:
         for idx, (prev_workflow_run_id, prev_ci_artifacts) in enumerate(
             [self.prev_ci_artifacts] + self.other_ci_artifacts
         ):
+            print(prev_workflow_run_id)
+
             if idx == 0:
                 # This is the truncated version to show on slack. For now.
                 new_failure_blocks = self.get_new_model_failure_blocks(
@@ -529,6 +531,11 @@ class Message:
 
             # To save the list of new model failures and uploaed to hub repositories
             extra_blocks = self.get_new_model_failure_blocks(prev_ci_artifacts=prev_ci_artifacts, to_truncate=False)
+
+            print(prev_ci_artifacts)
+            print(extra_blocks)
+            print(len(extra_blocks))
+
             if extra_blocks:
                 filename = "new_model_failures"
                 if idx > 0:
@@ -1346,6 +1353,9 @@ if __name__ == "__main__":
         prev_workflow_run_id = os.environ["PREV_WORKFLOW_RUN_ID"]
         other_workflow_run_id = os.environ["OTHER_WORKFLOW_RUN_ID"]
         other_workflow_run_ids.append(other_workflow_run_id)
+
+    print(prev_workflow_run_id)
+    print(other_workflow_run_ids)
 
     prev_ci_artifacts = (None, None)
     other_ci_artifacts = []
