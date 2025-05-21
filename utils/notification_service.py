@@ -1315,12 +1315,14 @@ if __name__ == "__main__":
 
     # Must have the same keys as in `additional_results`.
     # The values are used as the file names where to save the corresponding CI job results.
-    test_to_result_name = {
-        "PyTorch pipelines": "torch_pipeline",
-        "TensorFlow pipelines": "tf_pipeline",
-        "Examples directory": "example",
-        "DeepSpeed": "deepspeed",
-    }
+    test_to_result_name.update(
+        {
+            "PyTorch pipelines": "torch_pipeline",
+            "TensorFlow pipelines": "tf_pipeline",
+            "Examples directory": "example",
+            "DeepSpeed": "deepspeed",
+        }
+    )
     for job, job_result in additional_results.items():
         with open(f"ci_results_{job_name}/{test_to_result_name[job]}_results.json", "w", encoding="UTF-8") as fp:
             json.dump(job_result, fp, indent=4, ensure_ascii=False)
