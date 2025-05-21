@@ -728,7 +728,7 @@ class Message:
         if job_name == "run_models_gpu":
             model_results = self.model_results
         else:
-            model_results = self.additional_failures[job_to_test_map[job_name]]
+            model_results = self.additional_results[job_to_test_map[job_name]]
 
         print(model_results)
 
