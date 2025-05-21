@@ -724,11 +724,13 @@ class Message:
         if prev_ci_artifacts is None:
             return []
 
-        sorted_dict = sorted(self.model_results.items(), key=lambda t: t[0])
+        model_results = self.model_results
 
         # TODO: make this more clear/explicit
-        if "failures" in sorted_dict:
-            sorted_dict = {"dummy": sorted_dict}
+        if "failures" in model_results:
+            model_results = {"dummy": model_results}
+
+        sorted_dict = sorted(model_results.items(), key=lambda t: t[0])
 
         job = job_to_test_map[job_name]
         prev_model_results = {}
