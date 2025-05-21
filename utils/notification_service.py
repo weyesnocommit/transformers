@@ -726,6 +726,10 @@ class Message:
 
         sorted_dict = sorted(self.model_results.items(), key=lambda t: t[0])
 
+        # TODO: make this more clear/explicit
+        if "failures" in sorted_dict:
+            sorted_dict = {"dummy": sorted_dict}
+
         job = job_to_test_map[job_name]
         prev_model_results = {}
         if (
@@ -733,6 +737,8 @@ class Message:
             and f"{test_to_result_name[job]}_results.json" in prev_ci_artifacts[f"ci_results_{job_name}"]
         ):
             prev_model_results = json.loads(prev_ci_artifacts[f"ci_results_{job_name}"][f"{test_to_result_name[job]}_results.json"])
+            if "failures" in prev_model_results:
+                prev_model_results = {"dummy": prev_model_results}
 
         all_failure_lines = {}
         for job, job_result in sorted_dict:
